@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "RBtree.h"
 
 using namespace std;
 
@@ -16,6 +17,9 @@ bool isNumber(string s);
 int main() {
   cout << "COSC 336 Homework 3" << endl;
 
+  RedBlackTree rbTree;
+  rbTree.insert();
+  
   //Decides the datastructure or algorithm to be used
   cout << "What would you like to do?" 
   << "\n1 - Construct a RB-tree" 
