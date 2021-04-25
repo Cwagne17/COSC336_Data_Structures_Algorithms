@@ -16,9 +16,15 @@ bool isNumber(string s);
 
 int main() {
   cout << "COSC 336 Homework 3" << endl;
-
-  RedBlackTree rbTree;
-  rbTree.insert();
+  int input[8] = {10,5,8,15,17,13,11,12};
+  RedBlackTree rbTree = RedBlackTree();
+  for(int i = 0; i<8; i++){
+    rbTree.insert(input[i]);
+    cout << "tree" << endl;
+    rbTree.printTree();
+  }
+  // rbTree.printTree();
+  
   
   //Decides the datastructure or algorithm to be used
   cout << "What would you like to do?" 

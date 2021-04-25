@@ -1,4 +1,6 @@
 #include<iostream>
+#include <queue>
+#include <cstdlib>
 
 using namespace std;
 
@@ -11,6 +13,7 @@ class TreeNode {
   public:
     TreeNode(int value, TreeNode* parent, TreeNode* leftLeaf, TreeNode* rightLeaf);
     int getValue();
+    int getAbsValue();
     TreeNode* getParent();
     TreeNode* getLeftLeaf();
     TreeNode* getRightLeaf();
@@ -27,6 +30,7 @@ class RedBlackTree {
     void leftRotation(TreeNode* pivot);
     void rightRotation(TreeNode* pivot);
   public:
+    RedBlackTree();
     void insert(int value);
     void printTree();
 };
