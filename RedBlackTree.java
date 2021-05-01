@@ -7,10 +7,10 @@ class Node {
 	int color; // 1 . Red, 0 . Black
 }
 
-// class RedBlackTree implements the operations in Red Black Tree
+// class RedBlackTree implements insert and print in Red Black Tree datastructure
 public class RedBlackTree {
-	private Node root;
-	private Node TNULL;
+	private Node root; //Root of the tree
+	private Node TNULL; //The null child leaves that are black
   
   public RedBlackTree() {
 		TNULL = new Node();
@@ -18,10 +18,6 @@ public class RedBlackTree {
 		TNULL.left = null;
 		TNULL.right = null;
 		root = TNULL;
-  }
-
-  public Node getRoot(){
-		return this.root;
   }
 
   // insert the key to the tree in its appropriate position
@@ -184,5 +180,4 @@ public class RedBlackTree {
       printHelper(root.right, true);
 		}
 	}
-	
 }

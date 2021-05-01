@@ -3,11 +3,11 @@
 ### How to run the program
 1. Compile the program using 
 ```
-g++ -o main main.cpp RBtree.cpp
+javac *.java
 ```
 2. Run the program
 ```
-./main
+java Main
 ```
 3.  Follow prompts from program
 
