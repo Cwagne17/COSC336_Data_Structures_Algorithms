@@ -23,8 +23,7 @@ public class Main {
           flag=false;
           break;
         case 2:
-          loadDataStructureInput(input);
-          //create skip list
+          skipListMenu(input);
           flag=false;
           break;
         case 3:
@@ -43,7 +42,33 @@ public class Main {
     input.close();
     System.out.println("Thank you for using HW03 Algorithm and Data Structures program\nGoodbye. . .");
   }
-  
+  private static void skipListMenu(Scanner input) {
+    SkipList sL = new SkipList();
+    boolean sLFlag = true;
+    while(sLFlag){
+      System.out.println("Choose an option:\n1 - Insert integers from file\n2 - Search for an integer\n3 - Delete an integer\n4 - Print Skip List\n5 - Quit");
+      int selection = input.nextInt();
+      switch(selection){
+        case 1:
+          loadDataStructureInput(input);
+          createSkipList(sL);
+          break;
+        case 2:
+        case 3:
+        case 4:
+          System.out.println("\nSkipList:");
+          sL.printEverything();
+          System.out.println();
+          break;
+        case 5:
+          sLFlag = false;
+          break; 
+        default:
+          System.out.println("ERROR: Invalid option");
+      }
+    }
+  }
+
   private static void createRedBlackTree(){
     RedBlackTree tree = new RedBlackTree();
     for(int num: inputValues){
@@ -52,6 +77,12 @@ public class Main {
     System.out.println("\nRed Black Tree:");
     tree.print();
     System.out.println();
+  }
+  
+  private static void createSkipList(SkipList sL){
+    for(int num: inputValues){
+      sL.insert(num);
+    }
   }
 
   private static void loadAlgorithmInput(Scanner input){
