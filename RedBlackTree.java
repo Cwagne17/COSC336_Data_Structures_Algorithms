@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 // data structure that represents a node in the tree
 class Node {
 	int data; // holds the key
@@ -149,35 +152,39 @@ public class RedBlackTree {
 		node.parent = leftChild;
 	}
 
-	
-
-  // print the tree structure on the screen
+  /**
+	 * Uses a linked list as a makeshift queue
+	 * null is the flag that determines whether the tree is going to the next line
+	 * once an element is removed from the list, if the first element is null and is not empty then null is added
+	 */
 	public void print() {
-    printHelper(this.root, true);
-  }
-  
-	private void printHelper(Node root, boolean last) {
-		// print the tree structure on the screen
-	  if (root != TNULL) {
-      //Gets parent information
-      int parent = root.parent==null?0:root.parent.data;
-      int pColor=1;
-      String parentValue = "";
-      if(parent!=0){
-        pColor = root.parent.color == 1?-1:1;
-        parentValue = String.valueOf(parent*pColor);
-      } else {
-        parentValue = null;
-      }
-    
-      //Prints whether red or black
-      int sColor = root.color == 1?-1:1;
-      System.out.print("("+root.data*sColor+","+parentValue+") ");
-      if(last){
-        System.out.println();
-      }
-      printHelper(root.left, false);
-      printHelper(root.right, true);
+		LinkedList<Node> list = new LinkedList<Node>();
+		list.add(root);
+		list.add(null);
+		
+		while (!list.isEmpty()) {
+			Node tempNode = list.poll();
+
+			// Adds left child to list
+			if (tempNode.left != null && tempNode.left.data!=0)
+				list.add(tempNode.left);
+			// Adds right child to list
+			if (tempNode.right != null && tempNode.right.data!=0)
+				list.add(tempNode.right);
+
+			//Gets parent information
+			int parent = tempNode.parent==null?0:tempNode.parent.data;
+			String parentValue = parent!=0?String.valueOf(parent*(tempNode.parent.color == 1?-1:1)):null;
+			System.out.print("("+String.valueOf(tempNode.data*(tempNode.color == 1?-1:1))+","+parentValue+") ");
+			
+			if (list.element()==null) {
+				System.out.println();
+				list.remove();
+				if (!list.isEmpty()) {
+					list.add(null);
+				}
+			}
+
 		}
 	}
 }

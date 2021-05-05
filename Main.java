@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -27,8 +28,7 @@ public class Main {
           flag=false;
           break;
         case 3:
-          loadAlgorithmInput(input);
-          //Run algorithm
+          dijkstraAlgorithm(input);
           flag=false;
           break;
         case 4:
@@ -42,6 +42,17 @@ public class Main {
     input.close();
     System.out.println("Thank you for using HW03 Algorithm and Data Structures program\nGoodbye. . .");
   }
+
+  private static void createRedBlackTree(){
+    RedBlackTree tree = new RedBlackTree();
+    for(int num: inputValues){
+      tree.insert(num);
+    }
+    System.out.println("\nRed Black Tree:");
+    tree.print();
+    System.out.println();
+  }
+
   private static void skipListMenu(Scanner input) {
     SkipList sL = new SkipList();
     boolean sLFlag = true;
@@ -69,42 +80,82 @@ public class Main {
     }
   }
 
-  private static void createRedBlackTree(){
-    RedBlackTree tree = new RedBlackTree();
-    for(int num: inputValues){
-      tree.insert(num);
-    }
-    System.out.println("\nRed Black Tree:");
-    tree.print();
-    System.out.println();
-  }
-  
   private static void createSkipList(SkipList sL){
     for(int num: inputValues){
       sL.insert(num);
     }
   }
 
-  private static void loadAlgorithmInput(Scanner input){
-    getFileName(input); //Use Dijkstra if another custom .txt file was not made
-    
-  }
-
-  private static void loadDataStructureInput(Scanner input){
-    getFileName(input);
+  private static void dijkstraAlgorithm(Scanner input) {
     try {
-      inputValues = readInputFile();
+      getFileName(input); //Use Dijkstra if another custom .txt file was not made
+      ArrayList<String[]> payload = loadAlgorithmInput(input);
+      //Create Graph
+      for(int i=1; i<payload.size(); i++){
+        
+      }
+      //Call algorithm using 
+      //source = payload[0][0]
+      //destination = payload[0][1] 
     } catch (FileNotFoundException e) {
       System.out.println("ERROR: "+e);
     }
   }
 
+  private static void loadDataStructureInput(Scanner input){
+    getFileName(input);
+    try {
+      readInputFile();
+    } catch (FileNotFoundException e) {
+      System.out.println("ERROR: "+e);
+    }
+  }
+
+
+  /**
+  * Private functions related to reading input files
+  */
+
+
+  // Gets the file name from user
   private static void getFileName(Scanner input){
     System.out.println("Enter file name (EXCLUDE .txt)");
     fileName = input.next()+".txt";
   }
 
-  private static int[] readInputFile() throws FileNotFoundException{
+  /**
+   * 
+   * @param input - scanner used to get the fileName
+   * @return matrix that is formatted as
+   * [
+   *  [source node, destination node],
+   *  [ node key, node key, weight],
+   *  [ node key, node key, weight],
+   *  ...
+   * ]
+   * 
+   * Always assumes first line is the source and destination for the algorithm
+   * Assumes following lines are the nodes that make the edge and the weight for the edge
+   */
+  private static ArrayList<String[]> loadAlgorithmInput(Scanner input) throws FileNotFoundException{
+    File file = new File(fileName);
+    Scanner scan = new Scanner(file);
+    ArrayList<String[]> fileContent = new ArrayList<>();
+
+    while(scan.hasNextLine()){
+      fileContent.add(scan.nextLine().split(" "));
+    }
+    scan.close();
+
+    return fileContent;
+  }
+
+  /**
+   * Using file name in global variable
+   * 1. Counts the number of integers in file
+   * 2. Loads integers to inputValues array
+   */
+  private static void readInputFile() throws FileNotFoundException{
     Scanner counterScanner;
     Scanner fileScanner;
     File file = new File(fileName);
@@ -125,7 +176,6 @@ public class Main {
         intArray[i] = fileScanner.nextInt();
     }
     fileScanner.close();
-
-    return intArray;
+    inputValues = intArray;
   }
 }
