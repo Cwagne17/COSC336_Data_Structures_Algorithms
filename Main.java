@@ -65,7 +65,11 @@ public class Main {
           createSkipList(sL);
           break;
         case 2:
+          searchList(input, sL);
+          break;
         case 3:
+          deleteInt(input, sL);
+          break;
         case 4:
           System.out.println("\nSkipList:");
           sL.printEverything();
@@ -84,6 +88,18 @@ public class Main {
     for(int num: inputValues){
       sL.insert(num);
     }
+  }
+
+  private static void searchList(Scanner input, SkipList sL){
+    System.out.println("Choose an integer to search for.");
+    int num = input.nextInt();
+    sL.search(num);
+  }
+
+  private static void deleteInt(Scanner input, SkipList sL){
+    System.out.println("Choose an integer to delete.");
+    int num = input.nextInt();
+    sL.delete(num);
   }
 
   private static void dijkstraAlgorithm(Scanner input) {

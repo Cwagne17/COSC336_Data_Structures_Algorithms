@@ -94,6 +94,33 @@ public class SkipList {
     }
   }
 
+  public void search(int value){
+    SkipNode ptr = this.head;
+    boolean found = false;
+    while(!found && ptr!=null){
+      if(ptr.getValue()==value)
+        found=true;
+      ptr = ptr.forward[0];
+    }
+    System.out.println(found?value+" found":value+" not found");
+  }
+
+  public void delete(int value){
+    SkipNode ptr = this.head;
+    boolean deleted = false;
+    if(ptr.getValue()==value){
+      this.head = ptr.forward[0];
+    } else {
+      while(!deleted && ptr.forward[0]!=null){
+        if(ptr.forward[0].getValue()==value){
+          ptr.forward = ptr.forward[0].forward;
+          deleted=true;
+        }
+        ptr = ptr.forward[0];
+      }
+    }
+  }
+
   //Work on print out
   public void printEverything() {
     for(int i=maxLevel; i>=0; i--){
