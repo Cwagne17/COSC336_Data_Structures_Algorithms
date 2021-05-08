@@ -40,7 +40,7 @@ public class Main {
       }
     }
     input.close();
-    System.out.println("Thank you for using HW03 Algorithm and Data Structures program\nGoodbye. . .");
+    System.out.println("\nThank you for using HW03 Algorithm and Data Structures program\nGoodbye. . .");
   }
 
   private static void createRedBlackTree(){
@@ -104,15 +104,17 @@ public class Main {
 
   private static void dijkstraAlgorithm(Scanner input) {
     try {
+      Graph g = new Graph();
       getFileName(input); //Use Dijkstra if another custom .txt file was not made
       ArrayList<String[]> payload = loadAlgorithmInput(input);
+      String source = payload.get(0)[0];
+      String target = payload.get(0)[1];
+      
       //Create Graph
       for(int i=1; i<payload.size(); i++){
-        
+        g.addEdge(payload.get(i)[0], payload.get(i)[1], Double.parseDouble(payload.get(i)[2]));
       }
-      //Call algorithm using 
-      //source = payload[0][0]
-      //destination = payload[0][1] 
+      g.dijkstra(source, target);
     } catch (FileNotFoundException e) {
       System.out.println("ERROR: "+e);
     }
